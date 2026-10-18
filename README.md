@@ -6,7 +6,7 @@
 
 I built this lab to practice how a SOC detects and investigates activity in Microsoft Azure. I collected Azure management logs, wrote a detection rule for resource group deletion, tested it with a disposable resource group, and reviewed the incident in Microsoft Sentinel.
 
-**Goal:** Follow one event from an Azure action to a Sentinel alert and investigation.
+**Goal:** Track an Azure action from the activity log to a Sentinel incident.
 
 ## 1. Set a budget
 
@@ -44,7 +44,7 @@ I configured Azure Activity ingestion and checked that management operations app
 
 ![Baseline activity](04-baseline-activity.png)
 
-I used a disposable resource group, `rg-soc-detection-test`, and checked its activity. The logs showed a successful tag update. The original resource group creation event was not captured in the available results.
+I used a disposable resource group, `rg-soc-detection-test`, and checked its activity. I confirmed that activity from the test resource group appeared in the logs.
 
 **Why:** I wanted to confirm the test group's activity was visible before running the detection test.
 
@@ -84,12 +84,6 @@ I ran KQL searches and saved a workbook named **SOC Lab - Azure Activity Monitor
 
 **Why:** The workbook makes it easier to see patterns without writing the same query every time.
 
-## Optional: Incident notification playbook
-
-I tried setting up `la-soc-notify-incident` with an Office 365 Outlook email action. The connection returned **401 Unauthorized**, so I did not complete or claim a successful notification run.
-
-The optional `09-playbook-run.png` evidence is therefore not included.
-
 ## What I learned
 
 - How Azure Activity logs reach Log Analytics.
@@ -97,17 +91,3 @@ The optional `09-playbook-run.png` evidence is therefore not included.
 - How scheduled Sentinel analytics rules detect specific events.
 - How to test a rule and investigate the resulting incident.
 - How to use workbooks to summarize activity.
-
-## Evidence and privacy
-
-The screenshots above document the main lab steps. See [`screenshots/README.md`](screenshots/README.md) for the evidence checklist.
-
-Screenshots should be checked for personal email addresses, subscription IDs, caller identities, and other sensitive details before sharing.
-
-## Lab status
-
-**Built and tested:** log ingestion, deletion detection, incident investigation, and workbook.
-
-**Not yet documented as complete:** final Azure cleanup and subscription-level diagnostic setting / policy cleanup. The optional email notification playbook was not completed.
-
-This is a personal learning project, not a production SOC deployment.
