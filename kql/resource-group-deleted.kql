@@ -1,0 +1,9 @@
+// SOC-LAB-001 - Resource Group Deleted
+// Successful Azure resource group deletion operations
+AzureActivity
+| where TimeGenerated > ago(24h)
+| where OperationNameValue =~ "MICROSOFT.RESOURCES/SUBSCRIPTIONS/RESOURCEGROUPS/DELETE"
+| where ActivityStatusValue =~ "Success"
+| project TimeGenerated, Caller, ResourceGroup, ResourceId, OperationNameValue,
+          ActivityStatusValue, CorrelationId, SubscriptionId
+| order by TimeGenerated desc
