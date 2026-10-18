@@ -10,7 +10,7 @@ I built this lab to practice how a SOC detects and investigates activity in Micr
 
 ## 1. Set a budget
 
-**Screenshot:** `screenshots/00-cost-gate.png`
+![Budget set for the lab](00-cost-gate.png)
 
 I created a CAD $10 monthly budget for my SOC resource group, `rg-soc-lab`, with spending alerts.
 
@@ -18,7 +18,7 @@ I created a CAD $10 monthly budget for my SOC resource group, `rg-soc-lab`, with
 
 ## 2. Create a Log Analytics workspace
 
-**Screenshot:** `screenshots/01-workspace.png`
+![Log Analytics workspace](01-workspace.png)
 
 I created `law-soc-lab-k27x` in Canada Central.
 
@@ -26,7 +26,7 @@ I created `law-soc-lab-k27x` in Canada Central.
 
 ## 3. Enable Microsoft Sentinel
 
-**Screenshot:** `screenshots/02-sentinel.png`
+![Microsoft Sentinel](02-sentinel.png)
 
 I connected Microsoft Sentinel to the Log Analytics workspace.
 
@@ -34,7 +34,7 @@ I connected Microsoft Sentinel to the Log Analytics workspace.
 
 ## 4. Collect Azure Activity logs
 
-**Screenshot:** `screenshots/03-azure-activity-data.png`
+![Azure Activity logs arriving](03-azure-activity-data.png)
 
 I configured Azure Activity ingestion and checked that management operations appeared in the `AzureActivity` table.
 
@@ -42,7 +42,7 @@ I configured Azure Activity ingestion and checked that management operations app
 
 ## 5. Check baseline activity
 
-**Screenshot:** `screenshots/04-baseline-activity.png`
+![Baseline activity](04-baseline-activity.png)
 
 I used a disposable resource group, `rg-soc-detection-test`, and checked its activity. The logs showed a successful tag update. The original resource group creation event was not captured in the available results.
 
@@ -50,7 +50,7 @@ I used a disposable resource group, `rg-soc-detection-test`, and checked its act
 
 ## 6. Create the detection rule
 
-**Screenshot:** `screenshots/05-analytics-rule.png`
+![Scheduled analytics rule](05-analytics-rule.png)
 
 I created a scheduled Sentinel rule named **SOC-LAB-001 - Resource Group Deleted**. It looks for successful resource group deletion operations in Azure Activity logs.
 
@@ -60,7 +60,7 @@ I created a scheduled Sentinel rule named **SOC-LAB-001 - Resource Group Deleted
 
 ## 7. Test with a real deletion
 
-**Screenshot:** `screenshots/06-delete-event.png`
+![Successful deletion event](06-delete-event.png)
 
 I confirmed the test resource group contained no resources, deleted it, and checked Azure Activity for the successful deletion event.
 
@@ -68,7 +68,9 @@ I confirmed the test resource group contained no resources, deleted it, and chec
 
 ## 8. Investigate the incident
 
-**Screenshots:** `screenshots/07-incident.png` and `screenshots/08-investigation.png`
+![Sentinel incident](07-incident.png)
+
+![Incident investigation](08-investigation.png)
 
 I reviewed the Sentinel incident and checked the event details, including the operation, status, time, and affected resource group. The activity was part of my authorized lab test.
 
@@ -76,7 +78,7 @@ I reviewed the Sentinel incident and checked the event details, including the op
 
 ## 9. Hunt through logs and build a workbook
 
-**Screenshot:** `screenshots/10-workbook.png`
+![Azure Activity workbook](9-workbook.png)
 
 I ran KQL searches and saved a workbook named **SOC Lab - Azure Activity Monitoring** with a chart of the top Azure Activity operations.
 
@@ -98,9 +100,9 @@ The optional `09-playbook-run.png` evidence is therefore not included.
 
 ## Evidence and privacy
 
-The screenshot paths above are **placeholders until the actual images are uploaded**. See [`screenshots/README.md`](screenshots/README.md) for the evidence checklist.
+The screenshots above document the main lab steps. See [`screenshots/README.md`](screenshots/README.md) for the evidence checklist.
 
-Before publishing any screenshot, I will remove personal email addresses, subscription IDs, caller identities, and other sensitive details.
+Screenshots should be checked for personal email addresses, subscription IDs, caller identities, and other sensitive details before sharing.
 
 ## Lab status
 
