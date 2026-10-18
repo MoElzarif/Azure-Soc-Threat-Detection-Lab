@@ -4,11 +4,18 @@
 
 ## Overview
 
-I built this lab to practice how a SOC detects and investigates activity in Microsoft Azure. I collected Azure management logs, wrote a detection rule for resource group deletion, tested it with a disposable resource group, and reviewed the incident in Microsoft Sentinel.
+I built this lab to practice how a SOC detects and investigates activity in Microsoft Azure. I collected Azure management logs, wrote a detection rule for resource group deletion, tested it with a disposable resource group, and reviewed the resulting incident in Microsoft Sentinel.
 
 **Goal:** Track an Azure action from the activity log to a Sentinel incident.
 
-## 1. Set a budget
+## Results
+
+- Collected Azure Activity logs in a Log Analytics workspace.
+- Created a scheduled KQL-based analytics rule for successful resource group deletions.
+- Generated a Sentinel incident using an authorized test deletion.
+- Investigated the event and created an Azure Activity monitoring workbook.
+
+## 1. Configure a lab budget
 
 ![Budget set for the lab](00-cost-gate.png)
 
@@ -30,17 +37,17 @@ I created `law-soc-lab-k27x` in Canada Central.
 
 I connected Microsoft Sentinel to the Log Analytics workspace.
 
-**Why:** Sentinel lets me turn log searches into detections and incidents.
+**Why:** Sentinel lets me use analytics rules to generate alerts and incidents from ingested log data.
 
 ## 4. Collect Azure Activity logs
 
 ![Azure Activity logs arriving](03-azure-activity-data.png)
 
-I configured Azure Activity ingestion and checked that management operations appeared in the `AzureActivity` table.
+I configured Azure Activity log ingestion and checked that management operations appeared in the `AzureActivity` table.
 
 **Why:** A detection rule is only useful if the underlying logs are arriving.
 
-## 5. Check baseline activity
+## 5. Verify baseline activity
 
 ![Baseline activity](04-baseline-activity.png)
 
@@ -58,7 +65,7 @@ I created a scheduled Sentinel rule named **SOC-LAB-001 - Resource Group Deleted
 
 **Detection query:** [`kql/resource-group-deleted.kql`](kql/resource-group-deleted.kql)
 
-## 7. Test with a real deletion
+## 7. Validate the detection with a test deletion
 
 ![Successful deletion event](06-delete-event.png)
 
@@ -76,7 +83,7 @@ I reviewed the Sentinel incident and checked the event details, including the op
 
 **Why:** A SOC analyst needs to understand what happened, not just acknowledge an alert.
 
-## 9. Hunt through logs and build a workbook
+## 9. Analyze Azure Activity logs and build a workbook
 
 ![Azure Activity workbook](9-workbook.png)
 
